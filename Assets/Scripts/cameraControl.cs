@@ -5,16 +5,21 @@ public class cameraControl : MonoBehaviour
     public float mouseSensitivity = 200f;
     public float smoothSpeed = 10f;
 
-    public float minVerticalAngle = -90f;
-    public float maxVerticalAngle = 90f;
+    public float minVerticalAngle = -70f;
+    public float maxVerticalAngle = 70f;
 
-    public float minHorizontalAngle = -70f; // can't turn too far left
-    public float maxHorizontalAngle = 70f;  // can't turn too far right
+    public float minHorizontalAngle = -120f;
+    public float maxHorizontalAngle = 120f;
+
+    public float normalFOV = 60f;
+    public float zoomFOV = 30f;
+    public float zoomSpeed = 10f;
 
     float xRotation = 0f;
     float yRotation = 0f;
 
     Quaternion targetRotation;
+    Camera cam;
 
     void Start()
     {
@@ -23,6 +28,12 @@ public class cameraControl : MonoBehaviour
         xRotation = initialAngles.x;
         yRotation = initialAngles.y;
         targetRotation = transform.rotation;
+
+        cam = GetComponent<Camera>();
+        if (cam == null)
+        {
+            Debug.LogError("CameraControl script must be attached to a Camera component.");
+        }
     }
 
     void Update()
@@ -33,12 +44,17 @@ public class cameraControl : MonoBehaviour
         xRotation -= mouseY;
         yRotation += mouseX;
 
-        // Clamp both axes
         xRotation = Mathf.Clamp(xRotation, minVerticalAngle, maxVerticalAngle);
         yRotation = Mathf.Clamp(yRotation, minHorizontalAngle, maxHorizontalAngle);
 
-        // Update target and interpolate
         targetRotation = Quaternion.Euler(xRotation, yRotation, 0f);
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, smoothSpeed * Time.deltaTime);
+
+        // Zoom with right-click
+        if (cam != null)
+        {
+            float targetFOV = Input.GetMouseButton(1) ? zoomFOV : normalFOV;
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, zoomSpeed * Time.deltaTime);
+        }
     }
 }
