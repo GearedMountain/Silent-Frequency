@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &17471301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3387847368060310027, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &43373605
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,6 +710,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
   m_PrefabInstance: {fileID: 150965289}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &301276099 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1883607785130027352, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &309714698
 GameObject:
   m_ObjectHideFlags: 0
@@ -1110,6 +1120,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 454241747}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &512933956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5299828198886342747, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &551943180
 GameObject:
   m_ObjectHideFlags: 0
@@ -1350,6 +1365,11 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &557911198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -3100945150437493396, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &564307211
 GameObject:
   m_ObjectHideFlags: 0
@@ -1516,6 +1536,11 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &654371940 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8400144377800416916, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &713177229
 GameObject:
   m_ObjectHideFlags: 0
@@ -2118,8 +2143,20 @@ MonoBehaviour:
   morseCodeBeeperAudioSource: {fileID: 2041153629}
   morseCodeTransmissionTextBox: {fileID: 1466482528}
   morseCodeToTextTranslationTextBox: {fileID: 1135564925}
-  dashTimingSlider: {fileID: 1131491644}
-  completionTimingsSlider: {fileID: 565906677}
+  ledObjects:
+  - {fileID: 557911198}
+  - {fileID: 1948519904}
+  - {fileID: 2092724947}
+  - {fileID: 1560270564}
+  - {fileID: 17471301}
+  - {fileID: 512933956}
+  - {fileID: 654371940}
+  - {fileID: 1621602809}
+  - {fileID: 1704936208}
+  - {fileID: 301276099}
+  ledOnMaterial: {fileID: 2100000, guid: 41014b9af0cba6c41b5d175749b2c0f1, type: 2}
+  ledOffMaterial: {fileID: 2100000, guid: 4a2af56a8d57a8b43a0728d7e9806b90, type: 2}
+  wordDelayTime: 5
   currentLetterCount: 1
   currentMorseCodeTransmission: 
 --- !u!4 &1066496053
@@ -2929,6 +2966,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466482526}
   m_CullTransparentMesh: 1
+--- !u!1 &1560270564 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -5521025287579515804, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1598975291
 GameObject:
   m_ObjectHideFlags: 0
@@ -3169,6 +3211,11 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1621602809 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -8124015410070071871, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1629602038
 GameObject:
   m_ObjectHideFlags: 0
@@ -3339,6 +3386,11 @@ MonoBehaviour:
   m_Size: {x: 0.77, y: 1, z: 1}
   m_FadeFactor: 1
   m_Version: 3
+--- !u!1 &1704936208 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -4854365911155200315, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1754871092
 GameObject:
   m_ObjectHideFlags: 0
@@ -3698,6 +3750,9 @@ MonoBehaviour:
   maxVerticalAngle: 70
   minHorizontalAngle: -120
   maxHorizontalAngle: 120
+  normalFOV: 60
+  zoomFOV: 30
+  zoomSpeed: 10
 --- !u!1 &1928768351
 GameObject:
   m_ObjectHideFlags: 0
@@ -3784,6 +3839,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1928768351}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1948519904 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7167500391076517665, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2007691920
 GameObject:
   m_ObjectHideFlags: 0
@@ -4292,6 +4352,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2085803214}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2092724947 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5900673226164356092, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+  m_PrefabInstance: {fileID: 150965289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2112294638
 GameObject:
   m_ObjectHideFlags: 1

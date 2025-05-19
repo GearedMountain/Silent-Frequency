@@ -1,136 +1,140 @@
 using UnityEngine;
 using System.Collections;
 using TMPro;
-using UnityEngine.UI;
 using System.Collections.Generic;
+
 public class morseCodeManager : MonoBehaviour
 {
     public AudioSource morseCodeBeeperAudioSource;
-    public TMP_Text morseCodeTransmissionTextBox; // Raw morse code youre sending
-    public TMP_Text morseCodeToTextTranslationTextBox; // Alphabet characters translated from it
+    public TMP_Text morseCodeTransmissionTextBox;
+    public TMP_Text morseCodeToTextTranslationTextBox;
 
-    public Slider dashTimingSlider;
-    public Slider completionTimingsSlider;
+    public GameObject[] ledObjects;
+    public Material ledOnMaterial;
+    public Material ledOffMaterial;
+
+    [Header("Timing Settings")]
+    public float wordDelayTime = 3f; // Total time for word timeout
+    private float letterDelayTime => wordDelayTime * 0.4f; // 40% of word timeout
 
     private float pressStartTime;
     private float transmissionDelayTime;
     public int currentLetterCount = 1;
 
     private bool isSpacenarPressed = false;
-
     public string currentMorseCodeTransmission = "";
-    
-    private Coroutine waitingThreeSecondsCoroutine;
-    private Coroutine waitingOneSecondCoroutine;
+
+    private Coroutine waitingWordCoroutine;
+    private Coroutine waitingLetterCoroutine;
 
     private MorseCodeTranslator morseCodeTranslator;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         morseCodeTranslator = new MorseCodeTranslator();
+        ResetLEDs();
     }
 
-    // Update is called once per frame
     void Update()
     {
-         if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             pressStartTime = Time.time;
             isSpacenarPressed = true;
+
             if (!morseCodeBeeperAudioSource.isPlaying)
-            {
                 morseCodeBeeperAudioSource.Play();
-            }
 
-            // Make sure to reset the 3 second timer so it doesnt transmit too early
-            if (waitingThreeSecondsCoroutine != null)
+            if (waitingWordCoroutine != null)
             {
-                StopCoroutine(waitingThreeSecondsCoroutine);
-                waitingThreeSecondsCoroutine = null;
+                StopCoroutine(waitingWordCoroutine);
+                waitingWordCoroutine = null;
             }
 
-            // Make sure to reset the 1 second timer so it doesnt stop too early
-            if (waitingOneSecondCoroutine != null)
+            if (waitingLetterCoroutine != null)
             {
-                StopCoroutine(waitingOneSecondCoroutine);
-                waitingOneSecondCoroutine = null;
+                StopCoroutine(waitingLetterCoroutine);
+                waitingLetterCoroutine = null;
             }
-        }
 
-        // Fill dash slider while spacebar is held
-        if (isSpacenarPressed)
-        {
-            float elapsedMs = (Time.time) - pressStartTime;
-            dashTimingSlider.value = Mathf.Clamp(elapsedMs, 0f, .25f);
-        }
-
-        // Fill delay timer until transmission is sent
-        if (waitingThreeSecondsCoroutine != null)
-        {
-            float elapsedMs = (Time.time) - transmissionDelayTime;
-            completionTimingsSlider.value = Mathf.Clamp(elapsedMs, 0f, 3f);
+            ResetLEDs();
         }
 
         if (Input.GetKeyUp(KeyCode.Space))
         {
-            isSpacenarPressed = false;            
+            isSpacenarPressed = false;
             morseCodeBeeperAudioSource.Stop();
+
             float heldTime = Time.time - pressStartTime;
-            if (heldTime >= 0.25f)
+            string symbol = heldTime >= 0.25f ? "-" : ".";
+            currentMorseCodeTransmission += symbol;
+            morseCodeTransmissionTextBox.text += symbol;
+
+            // Replace previous letter if still editing it
+            string currentText = morseCodeToTextTranslationTextBox.text;
+            if (currentText.Length == currentLetterCount)
             {
-                // Dash was transmitted
-                morseCodeTransmissionTextBox.text += "-";
-                currentMorseCodeTransmission += "-";
-            }
-            else
-            {
-                // Dit was transmitted
-                morseCodeTransmissionTextBox.text += ".";
-                currentMorseCodeTransmission += ".";
+                morseCodeToTextTranslationTextBox.text = currentText.Substring(0, currentText.Length - 1);
             }
 
-            string currentTranslationLetter = morseCodeToTextTranslationTextBox.text;
-            if (currentTranslationLetter.Length == currentLetterCount)
-            {
-                Debug.Log("Replace");
-                morseCodeToTextTranslationTextBox.text = currentTranslationLetter.Substring(0, currentTranslationLetter.Length - 1);
-            }
             morseCodeToTextTranslationTextBox.text += morseCodeTranslator.TranslateCurrentCodeToLetter(currentMorseCodeTransmission);
 
             transmissionDelayTime = Time.time;
 
-            // Start the coroutine to wait 3 seconds for complete transmission
-            waitingThreeSecondsCoroutine = StartCoroutine(WaitThreeForTransmissionComplete());
-
-            // Start the coroutine to wait 1 second for letter completion
-            waitingOneSecondCoroutine = StartCoroutine(WaitOneSecondForLetterComplete());
-
+            waitingWordCoroutine = StartCoroutine(WaitForWordComplete());
+            waitingLetterCoroutine = StartCoroutine(WaitForLetterComplete());
         }
     }
 
-    IEnumerator WaitOneSecondForLetterComplete()
+    IEnumerator WaitForLetterComplete()
     {
-        // See if they havent pressed anything in 3 seconds, if so, complete the transmission
-        yield return new WaitForSeconds(1f);
-
-        Debug.Log("Letter was complete: ");
+        yield return new WaitForSeconds(letterDelayTime);
+        Debug.Log("Letter completed.");
         currentLetterCount++;
         currentMorseCodeTransmission = "";
         morseCodeTransmissionTextBox.text += " ";
     }
 
-    IEnumerator WaitThreeForTransmissionComplete()
+    IEnumerator WaitForWordComplete()
     {
-        // See if they havent pressed anything in 3 seconds, if so, complete the transmission
-        yield return new WaitForSeconds(3f);
+        float stepTime = wordDelayTime / ledObjects.Length;
 
-        Debug.Log("Transmission was complete: " + morseCodeTransmissionTextBox.text);
+        for (int i = 0; i < ledObjects.Length; i++)
+        {
+            yield return new WaitForSeconds(stepTime);
+            SetLEDState(i, true);
+        }
 
-        // Make sure to reset transmission translation counter
+        Debug.Log("Word completed.");
+
         currentLetterCount = 1;
         morseCodeToTextTranslationTextBox.text = "";
         morseCodeTransmissionTextBox.text = "";
+        ResetLEDs();
+    }
+
+    void SetLEDState(int index, bool isOn)
+    {
+        if (index >= 0 && index < ledObjects.Length)
+        {
+            Renderer renderer = ledObjects[index].GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = isOn ? ledOnMaterial : ledOffMaterial;
+            }
+        }
+    }
+
+    void ResetLEDs()
+    {
+        foreach (GameObject led in ledObjects)
+        {
+            Renderer renderer = led.GetComponent<Renderer>();
+            if (renderer != null)
+            {
+                renderer.material = ledOffMaterial;
+            }
+        }
     }
 }
 
