@@ -159,7 +159,6 @@ public class morseCodeManager : MonoBehaviour
     }
 }
 
-
 public class MorseCodeTranslator
 {
     
