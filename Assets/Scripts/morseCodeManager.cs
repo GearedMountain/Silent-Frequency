@@ -5,23 +5,28 @@ using System.Collections.Generic;
 
 public class morseCodeManager : MonoBehaviour
 {
+    public bool allowedToTransmit = true;
+
     public AudioSource morseCodeBeeperAudioSource;
     public TMP_Text morseCodeTransmissionTextBox;
     public TMP_Text morseCodeToTextTranslationTextBox;
+    public TMP_Text liveKeypressTextBox; // <- NEW FIELD
 
     public GameObject[] ledObjects;
     public Material ledOnMaterial;
     public Material ledOffMaterial;
 
     [Header("Timing Settings")]
-    public float wordDelayTime = 3f; // Total time for word timeout
-    private float letterDelayTime => wordDelayTime * 0.4f; // 40% of word timeout
+    public float wordDelayTime = 3f;
+    private float letterDelayTime => wordDelayTime * 0.4f;
 
     private float pressStartTime;
     private float transmissionDelayTime;
     public int currentLetterCount = 1;
 
     private bool isSpacenarPressed = false;
+    private bool hasSwitchedToDash = false;
+
     public string currentMorseCodeTransmission = "";
 
     private Coroutine waitingWordCoroutine;
@@ -33,6 +38,7 @@ public class morseCodeManager : MonoBehaviour
     {
         morseCodeTranslator = new MorseCodeTranslator();
         ResetLEDs();
+        liveKeypressTextBox.text = "";
     }
 
     void Update()
@@ -41,6 +47,8 @@ public class morseCodeManager : MonoBehaviour
         {
             pressStartTime = Time.time;
             isSpacenarPressed = true;
+            hasSwitchedToDash = false;
+            liveKeypressTextBox.text = ".";
 
             if (!morseCodeBeeperAudioSource.isPlaying)
                 morseCodeBeeperAudioSource.Play();
@@ -60,6 +68,17 @@ public class morseCodeManager : MonoBehaviour
             ResetLEDs();
         }
 
+        if (isSpacenarPressed)
+        {
+            float elapsed = Time.time - pressStartTime;
+
+            if (!hasSwitchedToDash && elapsed >= 0.25f)
+            {
+                liveKeypressTextBox.text = "-";
+                hasSwitchedToDash = true;
+            }
+        }
+
         if (Input.GetKeyUp(KeyCode.Space))
         {
             isSpacenarPressed = false;
@@ -67,10 +86,12 @@ public class morseCodeManager : MonoBehaviour
 
             float heldTime = Time.time - pressStartTime;
             string symbol = heldTime >= 0.25f ? "-" : ".";
+
             currentMorseCodeTransmission += symbol;
             morseCodeTransmissionTextBox.text += symbol;
 
-            // Replace previous letter if still editing it
+            liveKeypressTextBox.text = "";
+
             string currentText = morseCodeToTextTranslationTextBox.text;
             if (currentText.Length == currentLetterCount)
             {
