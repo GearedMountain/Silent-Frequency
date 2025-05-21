@@ -7,9 +7,14 @@ public class worldInteractionManager : MonoBehaviour
     public Color debugRayColor = Color.red;
 
     public TMP_Text currentActionTextbox;
-    private Camera cam;
 
+    private bool lookingAtSomething = false;
+    private Camera cam;
     private GameObject lastHitObject = null;
+
+    private string objectName;
+    // Gameobjects for various interactbles and their scripts
+    public logWriter logWriter; 
 
     void Start()
     {
@@ -20,6 +25,10 @@ public class worldInteractionManager : MonoBehaviour
     void Update()
     {
         FireRaycast();
+        if (lookingAtSomething && Input.GetKeyDown(KeyCode.E))
+        {
+            InteractWithObject(objectName);
+        }
     }
 
     void FireRaycast()
@@ -38,7 +47,7 @@ public class worldInteractionManager : MonoBehaviour
                 if (hitObject != lastHitObject)
                 {
                     lastHitObject = hitObject;
-                    string objectName = hitObject.name;
+                    objectName = hitObject.name;
                     if (currentActionTextbox != null)
                     {
                         currentActionTextbox.text = GetInteractionMessage(objectName);
@@ -55,12 +64,14 @@ public class worldInteractionManager : MonoBehaviour
             if (currentActionTextbox != null)
             {
                 currentActionTextbox.text = "";
+                lookingAtSomething = false;
             }
         }
     }
 
     string GetInteractionMessage(string objectName)
     {
+        lookingAtSomething = true;
         // Switch based on specific object names
         switch (objectName)
         {
@@ -81,6 +92,27 @@ public class worldInteractionManager : MonoBehaviour
 
             default:
                 return $"Interact with {objectName}";
+        }
+    }
+
+    void InteractWithObject(string objectName)
+    {
+        // Switch based on specific object names
+        switch (objectName)
+        {
+            case "New Transmission Log":
+                logWriter.Interact();
+                return;
+            case "Edit Transmission Log":
+
+            case "Delete Transmission Log":
+
+            case "Power Console":
+
+            case "Morse Terminal":
+
+            default:
+                return;
         }
     }
 }

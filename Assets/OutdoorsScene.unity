@@ -4101,6 +4101,7 @@ GameObject:
   - component: {fileID: 1101444827}
   - component: {fileID: 1101444826}
   - component: {fileID: 1101444825}
+  - component: {fileID: 1101444828}
   m_Layer: 0
   m_Name: Transmission Log Tray
   m_TagString: Untagged
@@ -4199,6 +4200,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1101444823}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1101444828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101444823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9d5c7ea3933b3f4c9b6229b3a9d56bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatedLogSheet: {fileID: 914059509}
 --- !u!1 &1115433918
 GameObject:
   m_ObjectHideFlags: 0
@@ -6654,6 +6668,7 @@ MonoBehaviour:
   rayDistance: 100
   debugRayColor: {r: 1, g: 0, b: 0, a: 1}
   currentActionTextbox: {fileID: 331520019}
+  logWriter: {fileID: 1101444828}
 --- !u!1 &1862508744
 GameObject:
   m_ObjectHideFlags: 0
