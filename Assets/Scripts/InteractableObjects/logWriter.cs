@@ -9,6 +9,8 @@ public class logWriter : MonoBehaviour
     public GameObject selectionHighlight;
     public GameObject holePrefab;
 
+    public holePunchShaderManager holePunchShaderManager;
+
     public float xStart = -0.0565f;
     public float xStep = 0.1f;
     public float yStart = .34f;
@@ -79,6 +81,7 @@ public class logWriter : MonoBehaviour
             Vector3 position = gridPositions[currentRow, currentCol];
             GameObject hole = Instantiate(holePrefab, Vector3.zero, Quaternion.identity, animatedLogSheet.transform);
             hole.transform.localPosition = gridPositions[currentRow, currentCol];
+            holePunchShaderManager.punchers.Add(hole.transform);
         }
     }
 
