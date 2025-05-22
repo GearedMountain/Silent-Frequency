@@ -14,6 +14,7 @@ public class morseCodeManager : MonoBehaviour
 
     public GameObject[] ledObjects;
     public GameObject morseCodeTranslationHover;
+    public GameObject morseCodePaddleInUse;
 
     private Animator morseCodeTranslationAnimator;
 
@@ -39,6 +40,8 @@ public class morseCodeManager : MonoBehaviour
     private MorseCodeTranslator morseCodeTranslator;
 
     private bool currentlySendingTransmission = false;
+
+    public cameraControl cameraControl;
     void Start()
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
@@ -51,11 +54,17 @@ public class morseCodeManager : MonoBehaviour
     {
         morseCodeTranslationAnimator.SetBool("TranslatorActive", true);
         currentlySendingTransmission = true;
+        cameraControl.isCameraLocked = true;
+        morseCodePaddleInUse.SetActive(true);
     }
     
     public void Exit(){
         morseCodeTranslationAnimator.SetBool("TranslatorActive", false);
         currentlySendingTransmission = false;
+        cameraControl.isCameraLocked = false;
+        morseCodePaddleInUse.SetActive(false);
+        StopTransmittingMorse(true);
+
 
     }
 
@@ -97,18 +106,29 @@ public class morseCodeManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Space) && currentlySendingTransmission)
         {
-            isSpacenarPressed = false;
-            morseCodeBeeperAudioSource.Stop();
+            StopTransmittingMorse(false);
+        }
+    }
 
-            float heldTime = Time.time - pressStartTime;
-            string symbol = heldTime >= 0.25f ? "-" : ".";
+    private void StopTransmittingMorse(bool forced)
+    {
+        isSpacenarPressed = false;
+        morseCodeBeeperAudioSource.Stop();
+
+        float heldTime = Time.time - pressStartTime;
+        string symbol = heldTime >= 0.25f ? "-" : ".";
+
+        liveKeypressTextBox.text = "";
+
+        if(!forced)
+        {
+            
 
             currentMorseCodeTransmission += symbol;
             morseCodeTransmissionTextBox.text += symbol;
 
-            liveKeypressTextBox.text = "";
 
             string currentText = morseCodeToTextTranslationTextBox.text;
             if (currentText.Length == currentLetterCount)
@@ -117,12 +137,24 @@ public class morseCodeManager : MonoBehaviour
             }
 
             morseCodeToTextTranslationTextBox.text += morseCodeTranslator.TranslateCurrentCodeToLetter(currentMorseCodeTransmission);
-
             transmissionDelayTime = Time.time;
 
             waitingWordCoroutine = StartCoroutine(WaitForWordComplete());
             waitingLetterCoroutine = StartCoroutine(WaitForLetterComplete());
+        } else{
+            ForceTransmit();
+            StopCoroutine(waitingWordCoroutine);
+            StopCoroutine(waitingLetterCoroutine);
         }
+    }
+
+    public void ForceTransmit(){
+        currentMorseCodeTransmission = "";
+        morseCodeTransmissionTextBox.text += " ";
+        currentLetterCount = 1;
+        morseCodeToTextTranslationTextBox.text = "";
+        morseCodeTransmissionTextBox.text = "";
+        ResetLEDs();
     }
 
     IEnumerator WaitForLetterComplete()

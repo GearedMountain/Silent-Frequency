@@ -21,6 +21,8 @@ public class cameraControl : MonoBehaviour
     Quaternion targetRotation;
     Camera cam;
 
+    public bool isCameraLocked = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -38,6 +40,9 @@ public class cameraControl : MonoBehaviour
 
     void Update()
     {
+        if (isCameraLocked){
+            return;
+        }
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 

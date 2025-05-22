@@ -25,7 +25,7 @@ public class worldInteractionManager : MonoBehaviour
     void Update()
     {
         FireRaycast();
-        if (lookingAtSomething && Input.GetKeyDown(KeyCode.Space))
+        if (lookingAtSomething && Input.GetKeyDown(KeyCode.E))
         {
             InteractWithObject(objectName);
         }
@@ -87,9 +87,14 @@ public class worldInteractionManager : MonoBehaviour
             case "Morse Paddle":
                 return "Transmit Morse Code";
 
+            case "Morse Paddle INUSE":
+                return "Stop Transmitting";
+                
             case "Morse Code Log":
                 return "Punch Hole in Log";
 
+            case "Alert Command Button":
+                return "Alert High Command";
             default:
                 return $"Interact with {objectName}";
         }
@@ -113,6 +118,10 @@ public class worldInteractionManager : MonoBehaviour
             case "Morse Paddle":
                 morseCodeManager.Interact();
                 return;
+            case "Morse Paddle INUSE":
+                morseCodeManager.Exit();
+                return;
+
             case "Morse Code Log":
                 logWriter.HandlePunchInput();
                 return;

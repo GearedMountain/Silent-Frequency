@@ -450,6 +450,114 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 95762122}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &114607814
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 114607815}
+  - component: {fileID: 114607818}
+  - component: {fileID: 114607817}
+  - component: {fileID: 114607816}
+  m_Layer: 0
+  m_Name: Morse Paddle INUSE
+  m_TagString: Interactable
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &114607815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114607814}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.33871025, y: -0, z: -0, w: 0.9408907}
+  m_LocalPosition: {x: 0.1, y: 0.99, z: -0.548}
+  m_LocalScale: {x: 5.0646, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 439703910}
+  m_LocalEulerAnglesHint: {x: -39.597, y: 0, z: 0}
+--- !u!65 &114607816
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114607814}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1.7988747}
+  m_Center: {x: 0, y: -0.003308235, z: -0.00529352}
+--- !u!23 &114607817
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114607814}
+  m_Enabled: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &114607818
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114607814}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1001 &150965289
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -574,6 +682,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 41014b9af0cba6c41b5d175749b2c0f1, type: 2}
+    - target: {fileID: 8793213867214881209, guid: e1fc82c153ab5da4785d3884e03364ce, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 13.640432
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1988,7 +2100,8 @@ Transform:
   m_LocalPosition: {x: -0.3309999, y: 2.477, z: -0.809}
   m_LocalScale: {x: 0.08853675, y: 0.12850372, z: 0.46712407}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 114607815}
   m_Father: {fileID: 154384089}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &439703911
@@ -4088,11 +4201,13 @@ MonoBehaviour:
   - {fileID: 1704936208}
   - {fileID: 301276099}
   morseCodeTranslationHover: {fileID: 258554831}
+  morseCodePaddleInUse: {fileID: 114607814}
   ledOnMaterial: {fileID: 2100000, guid: 41014b9af0cba6c41b5d175749b2c0f1, type: 2}
   ledOffMaterial: {fileID: 2100000, guid: 4a2af56a8d57a8b43a0728d7e9806b90, type: 2}
   wordDelayTime: 4
   currentLetterCount: 1
   currentMorseCodeTransmission: 
+  cameraControl: {fileID: 1823688469}
 --- !u!4 &1066496053
 Transform:
   m_ObjectHideFlags: 0
@@ -6961,6 +7076,7 @@ MonoBehaviour:
   normalFOV: 60
   zoomFOV: 30
   zoomSpeed: 10
+  isCameraLocked: 0
 --- !u!114 &1823688470
 MonoBehaviour:
   m_ObjectHideFlags: 0
