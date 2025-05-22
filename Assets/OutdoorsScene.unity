@@ -4087,7 +4087,7 @@ MonoBehaviour:
   - {fileID: 1621602809}
   - {fileID: 1704936208}
   - {fileID: 301276099}
-  morseCodeTranslationHover: {fileID: 0}
+  morseCodeTranslationHover: {fileID: 258554831}
   ledOnMaterial: {fileID: 2100000, guid: 41014b9af0cba6c41b5d175749b2c0f1, type: 2}
   ledOffMaterial: {fileID: 2100000, guid: 4a2af56a8d57a8b43a0728d7e9806b90, type: 2}
   wordDelayTime: 4

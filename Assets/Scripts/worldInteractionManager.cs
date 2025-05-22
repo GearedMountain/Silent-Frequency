@@ -25,7 +25,7 @@ public class worldInteractionManager : MonoBehaviour
     void Update()
     {
         FireRaycast();
-        if (lookingAtSomething && Input.GetKeyDown(KeyCode.E))
+        if (lookingAtSomething && Input.GetKeyDown(KeyCode.Space))
         {
             InteractWithObject(objectName);
         }

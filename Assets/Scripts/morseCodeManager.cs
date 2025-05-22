@@ -38,6 +38,7 @@ public class morseCodeManager : MonoBehaviour
 
     private MorseCodeTranslator morseCodeTranslator;
 
+    private bool currentlySendingTransmission = false;
     void Start()
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
@@ -49,15 +50,18 @@ public class morseCodeManager : MonoBehaviour
     public void Interact()
     {
         morseCodeTranslationAnimator.SetBool("TranslatorActive", true);
+        currentlySendingTransmission = true;
     }
     
     public void Exit(){
         morseCodeTranslationAnimator.SetBool("TranslatorActive", false);
+        currentlySendingTransmission = false;
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission)
         {
             pressStartTime = Time.time;
             isSpacenarPressed = true;
