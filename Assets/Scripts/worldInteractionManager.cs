@@ -78,7 +78,7 @@ public class worldInteractionManager : MonoBehaviour
             case "New Transmission Log":
                 return "Open New Transmission Log";
 
-            case "Edit Transmission Log":
+            case "Trash Log":
                 return "Edit Existing Transmission Log";
 
             case "Delete Transmission Log":
@@ -103,8 +103,9 @@ public class worldInteractionManager : MonoBehaviour
             case "New Transmission Log":
                 logWriter.Interact();
                 return;
-            case "Edit Transmission Log":
-
+            case "Trash Log":
+                logWriter.Reset();
+                return;
             case "Delete Transmission Log":
 
             case "Power Console":
