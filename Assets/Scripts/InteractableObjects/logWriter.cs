@@ -36,7 +36,7 @@ public class logWriter : MonoBehaviour
     
     public void Interact(){
         hasCreatedLog = true;
-        logSheetAnimator.SetTrigger ("NewCardGrabbed");
+        logSheetAnimator.SetTrigger("NewCardGrabbed");
         trashLogGameobject.SetActive(true);
         submitLogGameobject.SetActive(true);
         Debug.Log("New Log Created");
@@ -56,13 +56,18 @@ public class logWriter : MonoBehaviour
 
     }
 
+    public void Submit(){
+
+
+    }
+    
     // Update is called once per frame
     void Update()
     {
         // ONLY ALLOW THESE CLICKS IF YOU HAVE OPENED A NEW LOG
         if(hasCreatedLog){
             HandleMovementInput();
-            HandlePunchInput();
+            
         }
     }
 
@@ -99,17 +104,16 @@ public class logWriter : MonoBehaviour
         MoveHighlightToCurrent();
     }
 
-    void HandlePunchInput()
+    public void HandlePunchInput()
     {
-        if (Input.GetMouseButtonDown(0) && !punched[currentRow, currentCol])
-        {
-            punched[currentRow, currentCol] = true;
-            Vector3 position = gridPositions[currentRow, currentCol];
-            GameObject hole = Instantiate(holePrefab, Vector3.zero, Quaternion.identity, animatedLogSheet.transform);
-            hole.transform.localPosition = gridPositions[currentRow, currentCol];
-            holePunchShaderManager.punchers.Add(hole.transform);
-            holePuncherAudio.Play();
-        }
+
+        punched[currentRow, currentCol] = true;
+        Vector3 position = gridPositions[currentRow, currentCol];
+        GameObject hole = Instantiate(holePrefab, Vector3.zero, Quaternion.identity, animatedLogSheet.transform);
+        hole.transform.localPosition = gridPositions[currentRow, currentCol];
+        holePunchShaderManager.punchers.Add(hole.transform);
+        holePuncherAudio.Play();
+
     }
 
     void MoveHighlightToCurrent()

@@ -13,6 +13,10 @@ public class morseCodeManager : MonoBehaviour
     public TMP_Text liveKeypressTextBox; // <- NEW FIELD
 
     public GameObject[] ledObjects;
+    public GameObject morseCodeTranslationHover;
+
+    private Animator morseCodeTranslationAnimator;
+
     public Material ledOnMaterial;
     public Material ledOffMaterial;
 
@@ -36,9 +40,19 @@ public class morseCodeManager : MonoBehaviour
 
     void Start()
     {
+        morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
         morseCodeTranslator = new MorseCodeTranslator();
         ResetLEDs();
         liveKeypressTextBox.text = "";
+    }
+
+    public void Interact()
+    {
+        morseCodeTranslationAnimator.SetBool("TranslatorActive", true);
+    }
+    
+    public void Exit(){
+        morseCodeTranslationAnimator.SetBool("TranslatorActive", false);
     }
 
     void Update()

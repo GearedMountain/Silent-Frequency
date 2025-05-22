@@ -15,7 +15,7 @@ public class worldInteractionManager : MonoBehaviour
     private string objectName;
     // Gameobjects for various interactbles and their scripts
     public logWriter logWriter; 
-
+    public morseCodeManager morseCodeManager;
     void Start()
     {
         // Get the Camera component from the current GameObject
@@ -79,16 +79,16 @@ public class worldInteractionManager : MonoBehaviour
                 return "Open New Transmission Log";
 
             case "Trash Log":
-                return "Edit Existing Transmission Log";
+                return "Trash Transmission Log";
 
-            case "Delete Transmission Log":
-                return "Delete This Transmission Log";
+            case "Submit Log":
+                return "Submit Transmission Log";
 
-            case "Power Console":
-                return "Access Power Console";
+            case "Morse Paddle":
+                return "Transmit Morse Code";
 
-            case "Morse Terminal":
-                return "Use Morse Terminal";
+            case "Morse Code Log":
+                return "Punch Hole in Log";
 
             default:
                 return $"Interact with {objectName}";
@@ -106,12 +106,16 @@ public class worldInteractionManager : MonoBehaviour
             case "Trash Log":
                 logWriter.Reset();
                 return;
-            case "Delete Transmission Log":
-
+            case "Submit Log":
+                logWriter.Submit();
+                return;
             case "Power Console":
-
-            case "Morse Terminal":
-
+            case "Morse Paddle":
+                morseCodeManager.Interact();
+                return;
+            case "Morse Code Log":
+                logWriter.HandlePunchInput();
+                return;
             default:
                 return;
         }
