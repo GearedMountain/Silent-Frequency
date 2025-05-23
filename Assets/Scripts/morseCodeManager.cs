@@ -14,9 +14,11 @@ public class morseCodeManager : MonoBehaviour
 
     public GameObject[] ledObjects;
     public GameObject morseCodeTranslationHover;
+    public GameObject morseCodePaddle;
     public GameObject morseCodePaddleInUse;
 
     private Animator morseCodeTranslationAnimator;
+    private Animator morseCodePaddleAnimator;
 
     public Material ledOnMaterial;
     public Material ledOffMaterial;
@@ -45,6 +47,7 @@ public class morseCodeManager : MonoBehaviour
     void Start()
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
+        morseCodePaddleAnimator = morseCodePaddle.GetComponent<Animator>();
         morseCodeTranslator = new MorseCodeTranslator();
         ResetLEDs();
         liveKeypressTextBox.text = "";
@@ -97,6 +100,7 @@ public class morseCodeManager : MonoBehaviour
 
         if (isSpacenarPressed)
         {
+            morseCodePaddleAnimator.SetBool("PaddleDown", true);
             float elapsed = Time.time - pressStartTime;
 
             if (!hasSwitchedToDash && elapsed >= 0.25f)
@@ -114,6 +118,7 @@ public class morseCodeManager : MonoBehaviour
 
     private void StopTransmittingMorse(bool forced)
     {
+        morseCodePaddleAnimator.SetBool("PaddleDown", false);
         isSpacenarPressed = false;
         morseCodeBeeperAudioSource.Stop();
 

@@ -4092,6 +4092,7 @@ MonoBehaviour:
   - {fileID: 1704936208}
   - {fileID: 301276099}
   morseCodeTranslationHover: {fileID: 258554831}
+  morseCodePaddle: {fileID: 1716423481}
   morseCodePaddleInUse: {fileID: 114607814}
   ledOnMaterial: {fileID: 2100000, guid: 41014b9af0cba6c41b5d175749b2c0f1, type: 2}
   ledOffMaterial: {fileID: 2100000, guid: 4a2af56a8d57a8b43a0728d7e9806b90, type: 2}
@@ -6803,6 +6804,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Morse Paddle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f88b3428f836fc14ea909a0bdc9ef824, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
     - target: {fileID: 4792226381624090533, guid: f88b3428f836fc14ea909a0bdc9ef824, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -6818,6 +6823,9 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 114607815}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f88b3428f836fc14ea909a0bdc9ef824, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1853052959}
     - targetCorrespondingSourceObject: {fileID: 5312503639028515746, guid: f88b3428f836fc14ea909a0bdc9ef824, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1716423485}
@@ -7100,6 +7108,32 @@ MonoBehaviour:
   currentActionTextbox: {fileID: 331520019}
   logWriter: {fileID: 1101444828}
   morseCodeManager: {fileID: 1066496052}
+--- !u!1 &1853052958 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f88b3428f836fc14ea909a0bdc9ef824, type: 3}
+  m_PrefabInstance: {fileID: 1802238871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1853052959
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853052958}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 2.882456, y: 1, z: 1}
+  m_Center: {x: -0.019523874, y: 0, z: 0}
 --- !u!1 &1862508744
 GameObject:
   m_ObjectHideFlags: 0
