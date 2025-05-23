@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class morseCodeTranslator : MonoBehaviour
 {
@@ -45,6 +46,13 @@ public class morseCodeTranslator : MonoBehaviour
         { "----.", "9" }
     };
 
+    private Dictionary<string, string> letterToMorseCode;
+
+    void Awake()
+    {
+        letterToMorseCode = morseCodeToLetter.ToDictionary(pair => pair.Value, pair => pair.Key);
+    }
+
     public string TranslateCurrentCodeToLetter(string currentMorseCode)
     {
         if (morseCodeToLetter.TryGetValue(currentMorseCode, out string letter))
@@ -54,6 +62,18 @@ public class morseCodeTranslator : MonoBehaviour
         else
         {
            return "?";
+        }
+    }
+
+    public string TranslateLetterToMorse(string letter)
+    {
+        if (letterToMorseCode.TryGetValue(letter.ToUpper(), out string morse))
+        {
+            return morse;
+        }
+        else
+        {
+            return "?";
         }
     }
 }

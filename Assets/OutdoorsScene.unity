@@ -1231,8 +1231,8 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: ad33d99dc90d3ec46b2b7a23866e0a02, type: 3}
   m_Resource: {fileID: 8300000, guid: ad33d99dc90d3ec46b2b7a23866e0a02, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.84
-  m_Pitch: 0.85
+  m_Volume: 0.29
+  m_Pitch: 0.6
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -2191,6 +2191,7 @@ MonoBehaviour:
   dashTime: 0.3
   receivingLightGameobject: {fileID: 204179536}
   receivingLightMaterials: []
+  morseCodeTransmissionTextBox: {fileID: 1135564925}
   morseCodeTranslator: {fileID: 1075799952}
   vesselId: 
   incomingDirection: 

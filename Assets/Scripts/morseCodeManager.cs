@@ -53,7 +53,6 @@ public class morseCodeManager : MonoBehaviour
         //morseCodeTranslator = new MorseCodeTranslator();
         ResetLEDs();
         liveKeypressTextBox.text = "";
-        CreateIncomingTransmission();
     }
 
     public void Interact()
@@ -65,7 +64,7 @@ public class morseCodeManager : MonoBehaviour
     }
     
     public void CreateIncomingTransmission(){
-        incomingMorseCodeSignal.Transmit("...");
+        incomingMorseCodeSignal.Transmit("WE NEED HELP");
     }
 
     public void Exit(){
@@ -80,6 +79,11 @@ public class morseCodeManager : MonoBehaviour
 
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+                    CreateIncomingTransmission();
+
+        }
         if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission)
         {
             pressStartTime = Time.time;
