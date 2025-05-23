@@ -8,6 +8,8 @@ public class morseCodeManager : MonoBehaviour
     public bool allowedToTransmit = true;
 
     public AudioSource morseCodeBeeperAudioSource;
+    public AudioSource incomingSignalAudioSource;
+
     public TMP_Text morseCodeTransmissionTextBox;
     public TMP_Text morseCodeToTextTranslationTextBox;
     public TMP_Text liveKeypressTextBox; // <- NEW FIELD
@@ -39,8 +41,8 @@ public class morseCodeManager : MonoBehaviour
     private Coroutine waitingWordCoroutine;
     private Coroutine waitingLetterCoroutine;
 
-    private MorseCodeTranslator morseCodeTranslator;
-
+    public morseCodeTranslator morseCodeTranslator;
+    public incomingMorseCodeSignal incomingMorseCodeSignal;
     private bool currentlySendingTransmission = false;
 
     public cameraControl cameraControl;
@@ -48,9 +50,10 @@ public class morseCodeManager : MonoBehaviour
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
         morseCodePaddleAnimator = morseCodePaddle.GetComponent<Animator>();
-        morseCodeTranslator = new MorseCodeTranslator();
+        //morseCodeTranslator = new MorseCodeTranslator();
         ResetLEDs();
         liveKeypressTextBox.text = "";
+        CreateIncomingTransmission();
     }
 
     public void Interact()
@@ -61,6 +64,10 @@ public class morseCodeManager : MonoBehaviour
         morseCodePaddleInUse.SetActive(true);
     }
     
+    public void CreateIncomingTransmission(){
+        incomingMorseCodeSignal.Transmit("...");
+    }
+
     public void Exit(){
         morseCodeTranslationAnimator.SetBool("TranslatorActive", false);
         currentlySendingTransmission = false;
@@ -214,61 +221,4 @@ public class morseCodeManager : MonoBehaviour
     }
 }
 
-public class MorseCodeTranslator
-{
-    
-    Dictionary<string, string> morseCodeToLetter = new Dictionary<string, string>()
-    {
-        { ".-", "A" },
-        { "-...", "B" },
-        { "-.-.", "C" },
-        { "-..", "D" },
-        { ".", "E" },
-        { "..-.", "F" },
-        { "--.", "G" },
-        { "....", "H" },
-        { "..", "I" },
-        { ".---", "J" },
-        { "-.-", "K" },
-        { ".-..", "L" },
-        { "--", "M" },
-        { "-.", "N" },
-        { "---", "O" },
-        { ".--.", "P" },
-        { "--.-", "Q" },
-        { ".-.", "R" },
-        { "...", "S" },
-        { "-", "T" },
-        { "..-", "U" },
-        { "...-", "V" },
-        { ".--", "W" },
-        { "-..-", "X" },
-        { "-.--", "Y" },
-        { "--..", "Z" },
-        
-        // Numbers
-        { "-----", "0" },
-        { ".----", "1" },
-        { "..---", "2" },
-        { "...--", "3" },
-        { "....-", "4" },
-        { ".....", "5" },
-        { "-....", "6" },
-        { "--...", "7" },
-        { "---..", "8" },
-        { "----.", "9" }
-    };
 
-    public string TranslateCurrentCodeToLetter(string currentMorseCode)
-    {
-        if (morseCodeToLetter.TryGetValue(currentMorseCode, out string letter))
-        {
-            return letter;
-        }
-        else
-        {
-           return "?";
-        }
-    }
-
-}
