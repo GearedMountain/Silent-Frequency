@@ -32,6 +32,20 @@ public class incomingMorseCodeSignal : MonoBehaviour
         StartCoroutine(TransmitMorse(message));
     }
 
+    public void TransmitResponseWithDelay(string response, float averageWaitTime)
+    {
+        StartCoroutine(TransmitResponseWithDelayCoroutine(response,averageWaitTime));
+
+    }
+
+    public IEnumerator TransmitResponseWithDelayCoroutine(string response, float averageWaitTime)
+    {
+        Debug.Log("received response");
+        yield return new WaitForSeconds(averageWaitTime);
+        Transmit(response);
+
+    }
+
     public void PlayerTransmitMessage(string message){
         currentCommunication.ReadTransmission(message);
     }
@@ -185,9 +199,8 @@ public class transmissionInteraction : MonoBehaviour
         }
     }
 
-    IEnumerator SendResponse(string response)
+    public void SendResponse(string response)
     {
-        yield return new WaitForSeconds(averageWaitTime);
-        mainClass.Transmit(response);
+       mainClass.TransmitResponseWithDelay(response, averageWaitTime);
     }
 }

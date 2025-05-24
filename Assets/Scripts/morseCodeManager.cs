@@ -167,6 +167,7 @@ public class morseCodeManager : MonoBehaviour
     }
 
     public void ForceTransmit(){
+        incomingMorseCodeSignal.PlayerTransmitMessage(morseCodeToTextTranslationTextBox.text);
         currentMorseCodeTransmission = "";
         morseCodeTransmissionTextBox.text += " ";
         currentLetterCount = 1;
