@@ -64,9 +64,9 @@ public class morseCodeManager : MonoBehaviour
         morseCodePaddleInUse.SetActive(true);
     }
     
-    public void CreateIncomingTransmission(){
-        incomingMorseCodeSignal.Transmit("HELPQT0");
-    }
+    //public void CreateIncomingTransmission(){
+       // incomingMorseCodeSignal.Transmit("HELPQT0");
+    //}
 
     public void Exit(){
         morseCodeTranslationAnimator.SetBool("TranslatorActive", false);
@@ -80,11 +80,7 @@ public class morseCodeManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-                    CreateIncomingTransmission();
-
-        }
+        
         if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission)
         {
             if (!middleOfSendingTransmission){
@@ -198,7 +194,8 @@ public class morseCodeManager : MonoBehaviour
             SetLEDState(i, true);
         }
 
-        Debug.Log("Word completed.");
+        Debug.Log($"Word completed : {morseCodeToTextTranslationTextBox.text}");
+        incomingMorseCodeSignal.PlayerTransmitMessage(morseCodeToTextTranslationTextBox.text);
         middleOfSendingTransmission = false;
         currentLetterCount = 1;
         morseCodeToTextTranslationTextBox.text = "";

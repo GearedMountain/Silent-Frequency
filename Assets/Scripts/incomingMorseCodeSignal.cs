@@ -17,11 +17,12 @@ public class incomingMorseCodeSignal : MonoBehaviour
 
     public morseCodeTranslator morseCodeTranslator;
 
-    // Information and responses of this transmission 
-    public string vesselId;
-    public string incomingDirection;
-
+    private transmissionInteraction currentCommunication;
     void Start(){
+        // CREATE FIRST TRANSMISSION RESPONSE *TEMPORARY*
+        transmissionInteraction introVessel = new transmissionInteraction(this);
+        currentCommunication = introVessel;
+        introVessel.StartInteraction();
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[1];
     }
 
@@ -29,6 +30,10 @@ public class incomingMorseCodeSignal : MonoBehaviour
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[0];
         morseCodeTransmissionTextBox.text = "";
         StartCoroutine(TransmitMorse(message));
+    }
+
+    public void PlayerTransmitMessage(string message){
+        currentCommunication.ReadTransmission(message);
     }
 
     private IEnumerator TransmitMorse(string input)
@@ -133,4 +138,46 @@ public class incomingMorseCodeSignal : MonoBehaviour
         incomingSignalAudioSource.Stop();
     }
 
+}
+
+// Information and responses of this transmission 
+
+public class transmissionInteraction : MonoBehaviour
+{
+    public string vesselId;
+    public string incomingDirection;
+
+    public string entryMessage = "INC";
+
+    public string IDR = "IL5336";
+    
+    private incomingMorseCodeSignal mainClass;
+    public transmissionInteraction(incomingMorseCodeSignal mainClassRef)
+    {
+        mainClass = mainClassRef;
+    }
+
+    public void StartInteraction()
+    {
+        mainClass.Transmit(entryMessage);
+    }
+
+    public void ReadTransmission(string receivedMessage)
+    {
+
+        switch (receivedMessage)
+        {
+            case "IDR":
+                SendResponse(IDR);
+                return;
+            default:
+                SendResponse("RRQ");
+                return;
+        }
+    }
+
+    void SendResponse(string response)
+    {
+         mainClass.Transmit(response);
+    }
 }
