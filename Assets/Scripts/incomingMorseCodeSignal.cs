@@ -21,7 +21,12 @@ public class incomingMorseCodeSignal : MonoBehaviour
     public string vesselId;
     public string incomingDirection;
 
+    void Start(){
+        receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[1];
+    }
+
     public void Transmit(string message){
+        receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[0];
         morseCodeTransmissionTextBox.text = "";
         StartCoroutine(TransmitMorse(message));
     }
@@ -37,7 +42,8 @@ public class incomingMorseCodeSignal : MonoBehaviour
             yield return new WaitForSeconds(dashTime); // wait after letter
             
         }
-        StartCoroutine(ClearScreen());
+        receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[1];
+        //StartCoroutine(ClearScreen());
     }
 
     private IEnumerator TransmitCharacter(string morse)
@@ -78,6 +84,5 @@ public class incomingMorseCodeSignal : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         incomingSignalAudioSource.Stop();
     }
-
 
 }

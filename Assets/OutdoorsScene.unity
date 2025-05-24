@@ -2190,7 +2190,9 @@ MonoBehaviour:
   ditTime: 0.1
   dashTime: 0.3
   receivingLightGameobject: {fileID: 204179536}
-  receivingLightMaterials: []
+  receivingLightMaterials:
+  - {fileID: 2100000, guid: efb9911e83347df46aa989a2a57b3818, type: 2}
+  - {fileID: 2100000, guid: 1e0ecaa7723c05f4ca2abd1ed10c132e, type: 2}
   morseCodeTransmissionTextBox: {fileID: 1135564925}
   morseCodeTranslator: {fileID: 1075799952}
   vesselId: 

@@ -35,7 +35,7 @@ public class morseCodeManager : MonoBehaviour
 
     private bool isSpacenarPressed = false;
     private bool hasSwitchedToDash = false;
-
+    private bool middleOfSendingTransmission = false;
     public string currentMorseCodeTransmission = "";
 
     private Coroutine waitingWordCoroutine;
@@ -64,7 +64,7 @@ public class morseCodeManager : MonoBehaviour
     }
     
     public void CreateIncomingTransmission(){
-        incomingMorseCodeSignal.Transmit("WE NEED HELP");
+        incomingMorseCodeSignal.Transmit("HELP");
     }
 
     public void Exit(){
@@ -86,6 +86,11 @@ public class morseCodeManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission)
         {
+            if (!middleOfSendingTransmission){
+                middleOfSendingTransmission = true;
+                morseCodeToTextTranslationTextBox.text = "";
+                morseCodeTransmissionTextBox.text = "";
+            }
             pressStartTime = Time.time;
             isSpacenarPressed = true;
             hasSwitchedToDash = false;
@@ -193,7 +198,7 @@ public class morseCodeManager : MonoBehaviour
         }
 
         Debug.Log("Word completed.");
-
+        middleOfSendingTransmission = false;
         currentLetterCount = 1;
         morseCodeToTextTranslationTextBox.text = "";
         morseCodeTransmissionTextBox.text = "";
