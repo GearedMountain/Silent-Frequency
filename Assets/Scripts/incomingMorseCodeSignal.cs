@@ -150,7 +150,10 @@ public class transmissionInteraction : MonoBehaviour
     public string entryMessage = "INC";
 
     public string IDR = "IL5336";
+    public string REQ = "DOCK";
+    public string LCT = "NORTH";
     
+    public float averageWaitTime = 8;
     private incomingMorseCodeSignal mainClass;
     public transmissionInteraction(incomingMorseCodeSignal mainClassRef)
     {
@@ -170,14 +173,21 @@ public class transmissionInteraction : MonoBehaviour
             case "IDR":
                 SendResponse(IDR);
                 return;
+            case "REQ":
+                SendResponse(REQ);
+                return;  
+            case "LCT":
+                SendResponse(LCT);
+                return;     
             default:
                 SendResponse("RRQ");
                 return;
         }
     }
 
-    void SendResponse(string response)
+    IEnumerator SendResponse(string response)
     {
-         mainClass.Transmit(response);
+        yield return new WaitForSeconds(averageWaitTime);
+        mainClass.Transmit(response);
     }
 }
