@@ -46,6 +46,7 @@ public class morseCodeManager : MonoBehaviour
     private bool currentlySendingTransmission = false;
 
     public cameraControl cameraControl;
+    
     void Start()
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
