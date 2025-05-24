@@ -69,19 +69,67 @@ public class incomingMorseCodeSignal : MonoBehaviour
         morseCodeTransmissionTextBox.text = "";
     }
 
+    private float fadeTime = 0.01f;
+
     IEnumerator Dit()
     {
         inPause = false;
+       
+
+        incomingSignalAudioSource.volume = 0f;
         incomingSignalAudioSource.Play();
-        yield return new WaitForSeconds(ditTime);
+
+        // Fade in
+        float t = 0f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            incomingSignalAudioSource.volume = Mathf.Lerp(0f, 1f, t / fadeTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(ditTime - 2 * fadeTime);
+
+        // Fade out
+        t = 0f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            incomingSignalAudioSource.volume = Mathf.Lerp(1f, 0f, t / fadeTime);
+            yield return null;
+        }
+
         incomingSignalAudioSource.Stop();
     }
 
     IEnumerator Dash()
     {
         inPause = false;
+       
+
+        incomingSignalAudioSource.volume = 0f;
         incomingSignalAudioSource.Play();
-        yield return new WaitForSeconds(dashTime);
+
+        // Fade in
+        float t = 0f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            incomingSignalAudioSource.volume = Mathf.Lerp(0f, 1f, t / fadeTime);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(dashTime - 2 * fadeTime);
+
+        // Fade out
+        t = 0f;
+        while (t < fadeTime)
+        {
+            t += Time.deltaTime;
+            incomingSignalAudioSource.volume = Mathf.Lerp(1f, 0f, t / fadeTime);
+            yield return null;
+        }
+
         incomingSignalAudioSource.Stop();
     }
 

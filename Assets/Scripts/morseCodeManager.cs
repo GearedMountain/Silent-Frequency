@@ -46,7 +46,7 @@ public class morseCodeManager : MonoBehaviour
     private bool currentlySendingTransmission = false;
 
     public cameraControl cameraControl;
-    
+
     void Start()
     {
         morseCodeTranslationAnimator = morseCodeTranslationHover.GetComponent<Animator>();
@@ -65,7 +65,7 @@ public class morseCodeManager : MonoBehaviour
     }
     
     public void CreateIncomingTransmission(){
-        incomingMorseCodeSignal.Transmit("HELP");
+        incomingMorseCodeSignal.Transmit("HELPQT0");
     }
 
     public void Exit(){

@@ -6,7 +6,10 @@ public class logWriter : MonoBehaviour
     public GameObject animatedLogSheet;
 
     private Animator logSheetAnimator;
+    
+    private AudioSource logSheetAudio;
     private AudioSource holePuncherAudio;
+
     public GameObject selectionHighlight;
     public GameObject holePrefab;
 
@@ -29,6 +32,7 @@ public class logWriter : MonoBehaviour
     public void Start()
     {
         logSheetAnimator = animatedLogSheet.GetComponent<Animator>();
+        logSheetAudio =  animatedLogSheet.GetComponent<AudioSource>();
         holePuncherAudio = selectionHighlight.GetComponent<AudioSource>();
         GenerateGridPositions();
         MoveHighlightToCurrent();
@@ -37,6 +41,7 @@ public class logWriter : MonoBehaviour
     public void Interact(){
         hasCreatedLog = true;
         logSheetAnimator.SetTrigger("NewCardGrabbed");
+        logSheetAudio.Play();
         trashLogGameobject.SetActive(true);
         submitLogGameobject.SetActive(true);
         Debug.Log("New Log Created");
