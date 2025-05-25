@@ -167,7 +167,8 @@ public class transmissionInteraction : MonoBehaviour
     public string IDR = "IL5336";
     public string REQ = "DOCK";
     public string LCT = "NORTH";
-    
+    public string CLS = "PATROL";
+
     public float averageWaitTime = 8;
     private incomingMorseCodeSignal mainClass;
     public transmissionInteraction(incomingMorseCodeSignal mainClassRef)
@@ -193,7 +194,10 @@ public class transmissionInteraction : MonoBehaviour
                 return;  
             case "LCT":
                 SendResponse(LCT);
-                return;     
+                return;    
+            case "CLS":
+                SendResponse(CLS);
+                return;  
             default:
                 SendResponse("RRQ");
                 return;
