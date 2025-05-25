@@ -111,14 +111,14 @@ public class logWriter : MonoBehaviour
 
     public void HandlePunchInput()
     {
-
-        punched[currentRow, currentCol] = true;
-        Vector3 position = gridPositions[currentRow, currentCol];
-        GameObject hole = Instantiate(holePrefab, Vector3.zero, Quaternion.identity, animatedLogSheet.transform);
-        hole.transform.localPosition = gridPositions[currentRow, currentCol];
-        holePunchShaderManager.punchers.Add(hole.transform);
-        holePuncherAudio.Play();
-
+        if(!punched[currentRow, currentCol]){
+            punched[currentRow, currentCol] = true;
+            Vector3 position = gridPositions[currentRow, currentCol];
+            GameObject hole = Instantiate(holePrefab, Vector3.zero, Quaternion.identity, animatedLogSheet.transform);
+            hole.transform.localPosition = gridPositions[currentRow, currentCol];
+            holePunchShaderManager.punchers.Add(hole.transform);
+            holePuncherAudio.Play();
+        }
     }
 
     void MoveHighlightToCurrent()
