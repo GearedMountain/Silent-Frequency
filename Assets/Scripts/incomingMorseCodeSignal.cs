@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 using TMPro;
 public class incomingMorseCodeSignal : MonoBehaviour
 {
@@ -13,7 +15,17 @@ public class incomingMorseCodeSignal : MonoBehaviour
     public Material[] receivingLightMaterials;
 
     public TMP_Text morseCodeTransmissionTextBox;
+    public TMP_Text incomingTransmissionFrequency;
 
+    public Dictionary<string, string> classificationFrequencies = new Dictionary<string, string>()
+    {
+        { "SUBMARINE", "10\nkHz" },
+        { "DESTROYER", "35\nkHz" },
+        { "CARRIER", "50\nkHz" },
+        { "PATROL", "85\nkHz" },
+        { "CIVILLIAN", "100\nkHz" },
+        { "DISTRESS", "500\nkHz" }
+    };
 
     public morseCodeTranslator morseCodeTranslator;
 
@@ -27,6 +39,7 @@ public class incomingMorseCodeSignal : MonoBehaviour
     }
 
     public void Transmit(string message){
+        incomingTransmissionFrequency.text = classificationFrequencies[currentCommunication.frequencyClass];
         morseCodeOnCooldown = true;
 
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[0];
@@ -168,6 +181,8 @@ public class transmissionInteraction : MonoBehaviour
     public string REQ = "DOCK";
     public string LCT = "NORTH";
     public string CLS = "PATROL";
+
+    public string frequencyClass = "PATROL";
 
     public float averageWaitTime = 8;
     private incomingMorseCodeSignal mainClass;

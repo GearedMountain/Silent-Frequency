@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 39a6c1dd36a05dc4b8251c2be6b7e2c2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296305
+  packageName: Procedural Book
+  packageVersion: 1.9.0
+  assetPath: Assets/ScriptBoy/Procedural Book/Scripts/Runtime/Components/PageContent.cs
+  uploadId: 757826

@@ -166,7 +166,7 @@ public class morseCodeManager : MonoBehaviour
     }
 
     public void ForceTransmit(){
-        if (!incomingMorseCodeSignal.morseCodeOnCooldown){
+        if (!incomingMorseCodeSignal.morseCodeOnCooldown && morseCodeTransmissionTextBox.text != ""){
             incomingMorseCodeSignal.PlayerTransmitMessage(morseCodeToTextTranslationTextBox.text);
             currentMorseCodeTransmission = "";
             morseCodeTransmissionTextBox.text += " ";

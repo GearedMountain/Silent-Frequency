@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 842bdcadc672b5e4d819f5e95abd6cec
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296305
+  packageName: Procedural Book
+  packageVersion: 1.9.0
+  assetPath: Assets/ScriptBoy/Procedural Book/Scripts/Editor/Components/LivePageContentEditor.cs
+  uploadId: 757826

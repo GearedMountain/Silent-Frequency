@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 143b4a2e9f504a847b0ee01cc16ab9b1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296305
+  packageName: Procedural Book
+  packageVersion: 1.9.0
+  assetPath: Assets/ScriptBoy/Procedural Book/Scripts/Editor/Utility/AnnotationUtility.cs
+  uploadId: 757826

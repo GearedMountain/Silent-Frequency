@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 6b526a40335018546aaa2b37e6e0a863
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296305
+  packageName: Procedural Book
+  packageVersion: 1.9.0
+  assetPath: Assets/ScriptBoy/Procedural Book/Scripts/Runtime/Components/WiroBookBinding.cs
+  uploadId: 757826

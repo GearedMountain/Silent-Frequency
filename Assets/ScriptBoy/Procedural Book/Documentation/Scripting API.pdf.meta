@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 05de9becd7716ff4b9a95ce8f54e52ce
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 296305
+  packageName: Procedural Book
+  packageVersion: 1.9.0
+  assetPath: Assets/ScriptBoy/Procedural Book/Documentation/Scripting API.pdf
+  uploadId: 757826
