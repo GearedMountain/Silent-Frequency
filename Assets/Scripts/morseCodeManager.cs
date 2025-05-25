@@ -75,13 +75,12 @@ public class morseCodeManager : MonoBehaviour
         morseCodePaddleInUse.SetActive(false);
         StopTransmittingMorse(true);
 
-
     }
 
     void Update()
     {
         
-        if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission)
+        if (Input.GetKeyDown(KeyCode.Space) && currentlySendingTransmission && !incomingMorseCodeSignal.morseCodeOnCooldown)
         {
             if (!middleOfSendingTransmission){
                 middleOfSendingTransmission = true;
@@ -123,7 +122,7 @@ public class morseCodeManager : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyUp(KeyCode.Space) && currentlySendingTransmission)
+        if (Input.GetKeyUp(KeyCode.Space) && currentlySendingTransmission && !incomingMorseCodeSignal.morseCodeOnCooldown)
         {
             StopTransmittingMorse(false);
         }
@@ -167,13 +166,15 @@ public class morseCodeManager : MonoBehaviour
     }
 
     public void ForceTransmit(){
-        incomingMorseCodeSignal.PlayerTransmitMessage(morseCodeToTextTranslationTextBox.text);
-        currentMorseCodeTransmission = "";
-        morseCodeTransmissionTextBox.text += " ";
-        currentLetterCount = 1;
-        morseCodeToTextTranslationTextBox.text = "";
-        morseCodeTransmissionTextBox.text = "";
-        ResetLEDs();
+        if (!incomingMorseCodeSignal.morseCodeOnCooldown){
+            incomingMorseCodeSignal.PlayerTransmitMessage(morseCodeToTextTranslationTextBox.text);
+            currentMorseCodeTransmission = "";
+            morseCodeTransmissionTextBox.text += " ";
+            currentLetterCount = 1;
+            morseCodeToTextTranslationTextBox.text = "";
+            morseCodeTransmissionTextBox.text = "";
+            ResetLEDs();
+        }
     }
 
     IEnumerator WaitForLetterComplete()

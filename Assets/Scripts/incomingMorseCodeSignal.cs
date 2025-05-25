@@ -4,7 +4,7 @@ using TMPro;
 public class incomingMorseCodeSignal : MonoBehaviour
 {
     public AudioSource incomingSignalAudioSource;
-    private bool inPause = false;
+    public bool morseCodeOnCooldown = false;
 
     public float ditTime;
     public float dashTime;
@@ -27,6 +27,8 @@ public class incomingMorseCodeSignal : MonoBehaviour
     }
 
     public void Transmit(string message){
+        morseCodeOnCooldown = true;
+
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[0];
         morseCodeTransmissionTextBox.text = "";
         StartCoroutine(TransmitMorse(message));
@@ -34,6 +36,7 @@ public class incomingMorseCodeSignal : MonoBehaviour
 
     public void TransmitResponseWithDelay(string response, float averageWaitTime)
     {
+        morseCodeOnCooldown = true;
         StartCoroutine(TransmitResponseWithDelayCoroutine(response,averageWaitTime));
 
     }
@@ -62,6 +65,8 @@ public class incomingMorseCodeSignal : MonoBehaviour
             
         }
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[1];
+        morseCodeOnCooldown = false;
+
         //StartCoroutine(ClearScreen());
     }
 
@@ -92,8 +97,6 @@ public class incomingMorseCodeSignal : MonoBehaviour
 
     IEnumerator Dit()
     {
-        inPause = false;
-       
 
         incomingSignalAudioSource.volume = 0f;
         incomingSignalAudioSource.Play();
@@ -123,8 +126,6 @@ public class incomingMorseCodeSignal : MonoBehaviour
 
     IEnumerator Dash()
     {
-        inPause = false;
-       
 
         incomingSignalAudioSource.volume = 0f;
         incomingSignalAudioSource.Play();
