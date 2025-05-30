@@ -12,7 +12,6 @@ public class handbookControl : MonoBehaviour
            m_Book.StartAutoTurning(AutoTurnDirection.Next, m_AutoTurnSettings);
     }
     
-    
     }
      //   if (Input.GetKeyDown(KeyCode.A))
     //    { 
