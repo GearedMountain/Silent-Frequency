@@ -28,8 +28,8 @@ public class incomingMorseCodeSignal : MonoBehaviour
     };
 
     public morseCodeTranslator morseCodeTranslator;
-
     private transmissionInteraction currentCommunication;
+
     void Start(){
         // CREATE FIRST TRANSMISSION RESPONSE *TEMPORARY*
         transmissionInteraction introVessel = new transmissionInteraction(this);

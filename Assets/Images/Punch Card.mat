@@ -240,7 +240,7 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
-    - _HoleCount: 2
+    - _HoleCount: 1
     - _HoleRadius: 0.012
     - _IncludeIndirectLighting: 1
     - _InvTilingScale: 1
