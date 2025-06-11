@@ -29,6 +29,7 @@ public class logWriter : MonoBehaviour
     public GameObject submitLogGameobject;
     public GameObject trashLogGameobject;
 
+    public bool beingLookedAt = false;
     public void Start()
     {
         logSheetAnimator = animatedLogSheet.GetComponent<Animator>();
@@ -39,6 +40,7 @@ public class logWriter : MonoBehaviour
     }
     
     public void Interact(){
+        if(hasCreatedLog){ return; }
         hasCreatedLog = true;
         logSheetAnimator.SetTrigger("NewCardGrabbed");
         logSheetAudio.Play();
@@ -57,12 +59,19 @@ public class logWriter : MonoBehaviour
         trashLogGameobject.SetActive(false);
         submitLogGameobject.SetActive(false);
         hasCreatedLog = false;
-        logSheetAnimator.SetTrigger ("SubmitCard");
+
 
     }
 
     public void Submit(){
+        Reset();
+        logSheetAnimator.SetTrigger ("SubmitCard");
 
+    }
+
+    public void Trash(){
+        Reset();
+        logSheetAnimator.SetTrigger ("TrashCard");
 
     }
     
@@ -70,7 +79,7 @@ public class logWriter : MonoBehaviour
     void Update()
     {
         // ONLY ALLOW THESE CLICKS IF YOU HAVE OPENED A NEW LOG
-        if(hasCreatedLog){
+        if(hasCreatedLog && beingLookedAt){
             HandleMovementInput();
             
         }

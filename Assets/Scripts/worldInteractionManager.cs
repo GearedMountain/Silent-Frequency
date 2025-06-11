@@ -51,12 +51,15 @@ public class worldInteractionManager : MonoBehaviour
                     objectName = hitObject.name;
                     if (currentActionTextbox != null)
                     {
+                        if(!logWriter.beingLookedAt && objectName=="Morse Code Log") {logWriter.beingLookedAt = true;}
                         currentActionTextbox.text = GetInteractionMessage(objectName);
                     }
                 }
                 return;
             }
         }
+
+         if(logWriter.beingLookedAt) {logWriter.beingLookedAt = false;}
 
         // If we get here, either no hit or hit non-interactable
         if (lastHitObject != null)
@@ -117,7 +120,7 @@ public class worldInteractionManager : MonoBehaviour
                 logWriter.Interact();
                 return;
             case "Trash Log":
-                logWriter.Reset();
+                logWriter.Trash();
                 return;
             case "Submit Log":
                 logWriter.Submit();
