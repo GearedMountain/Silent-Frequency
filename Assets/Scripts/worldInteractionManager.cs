@@ -16,6 +16,7 @@ public class worldInteractionManager : MonoBehaviour
     // Gameobjects for various interactbles and their scripts
     public logWriter logWriter; 
     public morseCodeManager morseCodeManager;
+    public handbookControl handbookControl;
     void Start()
     {
         // Get the Camera component from the current GameObject
@@ -95,6 +96,13 @@ public class worldInteractionManager : MonoBehaviour
 
             case "Alert Command Button":
                 return "Alert High Command";
+
+            case "Forward Page":
+                return "Turn Page Forward";
+
+            case "Backward Page":
+                return "Turn Page Backward";
+
             default:
                 return $"Interact with {objectName}";
         }
@@ -125,6 +133,15 @@ public class worldInteractionManager : MonoBehaviour
             case "Morse Code Log":
                 logWriter.HandlePunchInput();
                 return;
+
+            case "Forward Page":
+                handbookControl.PageForward();
+                return;
+
+            case "Backward Page":
+                handbookControl.PageBackward();
+                return;
+
             default:
                 return;
         }

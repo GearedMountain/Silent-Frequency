@@ -17,6 +17,8 @@ public class incomingMorseCodeSignal : MonoBehaviour
     public TMP_Text morseCodeTransmissionTextBox;
     public TMP_Text incomingTransmissionFrequency;
 
+    public randomVesselGenerator randomVesselGenerator;
+
     public Dictionary<string, string> classificationFrequencies = new Dictionary<string, string>()
     {
         { "SUBMARINE", "10\nkHz" },
@@ -31,11 +33,19 @@ public class incomingMorseCodeSignal : MonoBehaviour
     private transmissionInteraction currentCommunication;
 
     void Start(){
-        // CREATE FIRST TRANSMISSION RESPONSE *TEMPORARY*
-        transmissionInteraction introVessel = new transmissionInteraction(this);
-        currentCommunication = introVessel;
-        introVessel.StartInteraction();
         receivingLightGameobject.GetComponent<Renderer>().material = receivingLightMaterials[1];
+        CreateRandomVessel();
+    }
+
+    void CreateRandomVessel(){
+        // Instantiate the new vessel
+        currentCommunication = new transmissionInteraction(this);
+        
+        // Use random generator to create the vessel
+        randomVesselGenerator.CreateRandomFriendly(currentCommunication);
+
+        // Begin communication
+        currentCommunication.StartInteraction();
     }
 
     public void Transmit(string message){
