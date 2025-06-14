@@ -59,6 +59,7 @@ public class worldInteractionManager : MonoBehaviour
             }
         }
 
+
          if(logWriter.beingLookedAt) {logWriter.beingLookedAt = false;}
 
         // If we get here, either no hit or hit non-interactable
